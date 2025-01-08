@@ -1,6 +1,5 @@
 export function renderGallery(images) {
-  const gallery = document.querySelector('.gallery');
-  const markup = images
+  return images
     .map(
       ({
         webformatURL,
@@ -11,22 +10,28 @@ export function renderGallery(images) {
         comments,
         downloads,
       }) => `
-      <a class="gallery__item" href="${largeImageURL}">
-        <div class="gallery__card">
-          <img class="gallery__image" src="${webformatURL}" alt="${tags}" loading="lazy" />
-          <div class="gallery__info">
-            <p><b>Likes:</b> ${likes}</p>
-            <p><b>Views:</b> ${views}</p>
-            <p><b>Comments:</b> ${comments}</p>
-            <p><b>Downloads:</b> ${downloads}</p>
+        <a class="gallery-item" href="${largeImageURL}">
+          <div class="gallery__card">
+            <img class="gallery__image" src="${webformatURL}" alt="${tags}" loading="lazy" />
+            <div class="gallery__info">
+              <p><b>Likes:</b> ${likes}</p>
+              <p><b>Views:</b> ${views}</p>
+              <p><b>Comments:</b> ${comments}</p>
+              <p><b>Downloads:</b> ${downloads}</p>
+            </div>
           </div>
-        </div>
-      </a>`
+        </a>`
     )
     .join('');
-  gallery.innerHTML = markup;
 }
 
-export function clearGallery() {
-  document.querySelector('.gallery').innerHTML = '';
+export function showMessage(message) {
+  const errorMessage = document.querySelector('.error-message');
+  errorMessage.textContent = message;
+  errorMessage.classList.remove('hidden');
+}
+
+export function hideMessage() {
+  const errorMessage = document.querySelector('.error-message');
+  errorMessage.classList.add('hidden');
 }
